@@ -1,1 +1,1586 @@
-404: Not Found
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly Tracker - Playful</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Franklin+Gothic+Medium&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Design System Variables */
+      :root {
+        /* Colors */
+        --primary: #6fc4ee;
+        --secondary: #f79552;
+        --success: #8dc757;
+        --warning: #ffcd2f;
+        --error: #ef4a88;
+        --purple: #9579b3;
+        --dark: #252626;
+        --light: #dbdada;
+        --white: #ffffff;
+
+        /* Typography */
+        --font-xs: 0.75rem;
+        --font-sm: 0.875rem;
+        --font-base: 1.0625rem;
+        --font-lg: 1.25rem;
+        --font-xl: 1.5rem;
+        --font-2xl: 2rem;
+        --font-3xl: 2.5rem;
+        --font-4xl: 3.25rem;
+
+        --font-light: 300;
+        --font-normal: 400;
+        --font-medium: 500;
+        --font-semibold: 600;
+        --font-bold: 700;
+
+        --leading-tight: 1.25;
+        --leading-snug: 1.375;
+        --leading-normal: 1.5;
+        --leading-relaxed: 1.625;
+
+        /* Spacing */
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.25rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+        --space-16: 4rem;
+
+        /* Border Radius */
+        --radius-sm: 0.5rem;
+        --radius-md: 1rem;
+        --radius-lg: 1.25rem;
+
+        /* Shadows */
+        --shadow-xs: 0 1px 2px rgba(37, 38, 38, 0.05);
+        --shadow-sm: 0 1px 3px rgba(37, 38, 38, 0.08);
+        --shadow-md: 0 2px 6px rgba(37, 38, 38, 0.1);
+        --shadow-hover: 0 4px 12px rgba(37, 38, 38, 0.12);
+        --shadow-active: 0 6px 20px rgba(37, 38, 38, 0.15);
+      }
+
+      /* Apple-style Animation System */
+      .animate {
+        -webkit-animation-duration: 0.6s;
+        animation-duration: 0.6s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .delay-1 {
+        -webkit-animation-delay: 0.1s;
+        animation-delay: 0.1s;
+      }
+
+      /* Gentle Settle Animation */
+      @-webkit-keyframes gentleSettle {
+        0% {
+          opacity: 0;
+          -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+        }
+      }
+      @keyframes gentleSettle {
+        0% {
+          opacity: 0;
+          -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+        }
+      }
+
+      .gentleSettle {
+        -webkit-animation-name: gentleSettle;
+        animation-name: gentleSettle;
+      }
+
+      /* Soft Header Slide */
+      @-webkit-keyframes softSlideDown {
+        0% {
+          opacity: 0;
+          -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+        }
+        100% {
+          opacity: 1;
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+        }
+      }
+      @keyframes softSlideDown {
+        0% {
+          opacity: 0;
+          -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+        }
+        100% {
+          opacity: 1;
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+        }
+      }
+
+      .softSlideDown {
+        -webkit-animation-name: softSlideDown;
+        animation-name: softSlideDown;
+      }
+
+      /* Custom Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(37, 38, 38, 0.3);
+        border-radius: 4px;
+      }
+
+      /* Firefox scrollbar */
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(37, 38, 38, 0.3) transparent;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        font-size: var(--font-base);
+        font-weight: var(--font-normal);
+        line-height: var(--leading-normal);
+        color: var(--dark);
+        background-color: #fafafa;
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      /* Typography with tight kerning */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        letter-spacing: -0.04em;
+      }
+
+      /* Header */
+      .header {
+        background: var(--white);
+        border-bottom: 1px solid #f0f0f0;
+        box-shadow: var(--shadow-xs);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        flex-shrink: 0;
+      }
+
+      .nav {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: var(--space-3) var(--space-4);
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: var(--space-4);
+      }
+
+      .nav-left {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .nav-center {
+        display: flex;
+        justify-content: center;
+      }
+
+      .nav-right {
+        display: flex;
+        justify-content: flex-end;
+        /* Reserved for future features like search */
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        opacity: 1;
+        gap: var(--space-3);
+      }
+
+      .logo-icon {
+        height: 32px;
+        width: 32px;
+        flex-shrink: 0;
+      }
+
+      .logo-text {
+        font-size: var(--font-xl);
+        font-weight: var(--font-semibold);
+        color: var(--dark);
+        letter-spacing: -0.04em;
+      }
+
+      .menu-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: var(--space-2);
+        border-radius: var(--radius-sm);
+        transition: background-color 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        width: 24px;
+        height: 24px;
+        justify-content: center;
+      }
+
+      .menu-button:hover {
+        background: rgba(111, 196, 238, 0.1);
+      }
+
+      .menu-line {
+        width: 16px;
+        height: 2px;
+        background: var(--dark);
+        border-radius: 1px;
+        transition: all 0.3s ease;
+      }
+
+      /* Close button in sidebar */
+      .sidebar-close {
+        position: absolute;
+        top: var(--space-3);
+        right: var(--space-4);
+        background: var(--white);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        box-shadow: 0 2px 4px rgba(37, 38, 38, 0.1);
+      }
+
+      .sidebar-close:hover {
+        background: #f8f8f8;
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px rgba(37, 38, 38, 0.15);
+      }
+
+      .sidebar-close::before {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 2px;
+        background: var(--dark);
+        border-radius: 1px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      .sidebar-close::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 12px;
+        background: var(--dark);
+        border-radius: 1px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      /* Desktop Navigation */
+      .nav-desktop {
+        display: block;
+      }
+
+      .sidebar-desktop {
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 320px;
+        height: 100vh;
+        background: var(--dark);
+        z-index: 200;
+        transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        overflow-y: auto;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15),
+          0 20px 48px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.15);
+      }
+
+      .sidebar-desktop.open {
+        left: 0;
+      }
+
+      /* Mobile Navigation */
+      .nav-mobile {
+        display: none;
+      }
+
+      .sidebar-mobile {
+        position: fixed;
+        top: 0;
+        left: -100vw;
+        width: 100vw;
+        height: 100vh;
+        background: var(--dark);
+        z-index: 200;
+        transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        overflow-y: auto;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15),
+          0 20px 48px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.15);
+      }
+
+      .sidebar-mobile.open {
+        left: 0;
+      }
+
+      .sidebar-content {
+        padding: var(--space-6);
+        padding-top: 114px;
+      }
+
+      .sidebar-section {
+        margin-bottom: var(--space-8);
+      }
+
+      .sidebar-section h3 {
+        font-size: var(--font-sm);
+        font-weight: var(--font-semibold);
+        color: var(--white);
+        margin-bottom: var(--space-4);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: var(--space-2);
+      }
+
+      .sidebar-nav a {
+        display: block;
+        padding: var(--space-2) var(--space-3);
+        color: var(--white);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        transition: all 0.2s ease;
+        font-weight: var(--font-normal);
+        font-size: var(--font-sm);
+      }
+
+      .sidebar-nav a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+      }
+
+      /* Overlay for dimming and blurring content */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(37, 38, 38, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 150;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Main Content */
+      .main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 var(--space-6);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 60px;
+        flex: 1;
+      }
+
+      .tracker-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: calc(100vh - 60px);
+        padding-top: var(--space-8);
+        padding-bottom: var(--space-6);
+      }
+
+      /* Weekly Tracker Styles */
+      .tracker-container {
+        background: var(--white);
+        border: 2px solid #e5e7eb;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+        max-width: 1200px;
+        width: 100%;
+        margin-bottom: var(--space-8);
+      }
+
+      .tracker-header {
+        padding: var(--space-8) var(--space-6);
+        text-align: center;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .tracker-header h1 {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: var(--font-4xl);
+        font-weight: 500;
+        color: var(--dark);
+        margin-bottom: var(--space-1);
+        letter-spacing: -0.04em;
+      }
+
+      .tracker-header .subtitle {
+        font-size: var(--font-lg);
+        color: #666;
+        font-weight: var(--font-normal);
+        line-height: var(--leading-snug);
+      }
+
+      .controls {
+        padding: var(--space-5) var(--space-6);
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        gap: var(--space-4);
+        align-items: center;
+        flex-wrap: wrap;
+        background: #f8fafc;
+      }
+
+      .mode-toggle {
+        display: flex;
+        background: #e2e8f0;
+        border-radius: var(--radius-sm);
+        padding: var(--space-1);
+      }
+
+      .mode-btn {
+        padding: var(--space-2) var(--space-4);
+        border: none;
+        background: transparent;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-weight: var(--font-medium);
+        transition: all 0.2s ease;
+        font-size: var(--font-sm);
+        color: var(--dark);
+      }
+
+      .mode-btn.active {
+        background: var(--white);
+        color: var(--primary);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .mode-btn:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .add-student {
+        display: flex;
+        gap: var(--space-2);
+        align-items: center;
+      }
+
+      .add-student input {
+        padding: var(--space-2) var(--space-3);
+        border: 1px solid #d1d5db;
+        border-radius: var(--radius-sm);
+        font-size: var(--font-sm);
+        min-width: 150px;
+        font-family: inherit;
+        transition: border-color 0.2s ease;
+      }
+
+      .add-student input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(111, 196, 238, 0.1);
+      }
+
+      .add-student button {
+        padding: var(--space-2) var(--space-4);
+        background: var(--success);
+        color: var(--white);
+        border: none;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-size: var(--font-sm);
+        font-weight: var(--font-medium);
+        transition: all 0.2s ease;
+      }
+
+      .add-student button:hover {
+        background: #7bb653;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .save-load-controls {
+        display: flex;
+        gap: var(--space-2);
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .save-btn,
+      .load-btn,
+      .reset-btn {
+        padding: var(--space-2) var(--space-4);
+        border: 1px solid #d1d5db;
+        background: var(--white);
+        color: var(--dark);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-size: var(--font-sm);
+        font-weight: var(--font-medium);
+        transition: all 0.2s ease;
+        box-shadow: var(--shadow-xs);
+      }
+
+      .save-btn:hover,
+      .load-btn:hover,
+      .reset-btn:hover {
+        background: #f9fafb;
+        border-color: #9ca3af;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .file-input {
+        display: none;
+      }
+
+      .table-container {
+        padding: var(--space-6);
+        overflow-x: auto;
+      }
+
+      .metrics {
+        margin-bottom: var(--space-5);
+      }
+
+      .metrics h3 {
+        font-size: var(--font-lg);
+        color: var(--dark);
+        margin-bottom: var(--space-3);
+        font-weight: var(--font-semibold);
+      }
+
+      .metric-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+
+      .metric-tag {
+        background: #e0e7ff;
+        color: #3730a3;
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--space-4);
+        font-size: var(--font-xs);
+        font-weight: var(--font-medium);
+      }
+
+      .behavior-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--font-sm);
+        background: var(--white);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .behavior-table th {
+        background: #f8fafc;
+        padding: var(--space-3) var(--space-2);
+        text-align: left;
+        font-weight: var(--font-semibold);
+        color: var(--dark);
+        border-bottom: 2px solid #e5e7eb;
+      }
+
+      .behavior-table th:first-child {
+        min-width: 200px;
+        text-align: left;
+      }
+
+      .behavior-table th.day-header {
+        text-align: center;
+        min-width: 80px;
+      }
+
+      .behavior-table td {
+        padding: var(--space-3) var(--space-2);
+        border-bottom: 1px solid #f3f4f6;
+        vertical-align: middle;
+      }
+
+      .behavior-table tr:hover {
+        background: #f9fafb;
+      }
+
+      .student-name {
+        font-weight: var(--font-medium);
+        color: var(--dark);
+      }
+
+      .behavior-metric {
+        color: #6b7280;
+        font-size: var(--font-xs);
+        margin-top: var(--space-1);
+      }
+
+      .day-cell {
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        min-width: 60px;
+      }
+
+      .status-indicator {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid #d1d5db;
+        background: var(--white);
+        transition: all 0.2s ease;
+        position: relative;
+      }
+
+      .status-indicator.check {
+        background: var(--success);
+        border-color: var(--success);
+      }
+
+      .status-indicator.check::after {
+        content: "✓";
+        color: var(--white);
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 14px;
+      }
+
+      .status-indicator.x {
+        background: var(--error);
+        border-color: var(--error);
+      }
+
+      .status-indicator.x::after {
+        content: "✗";
+        color: var(--white);
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 14px;
+      }
+
+      .status-indicator:hover {
+        transform: scale(1.1);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .week-summary {
+        margin-top: var(--space-6);
+        padding: var(--space-4);
+        background: #f8fafc;
+        border-radius: var(--radius-sm);
+        border: 1px solid #e5e7eb;
+      }
+
+      .week-summary h3 {
+        font-size: var(--font-lg);
+        color: var(--dark);
+        margin-bottom: var(--space-3);
+        font-weight: var(--font-semibold);
+      }
+
+      .summary-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: var(--space-4);
+        margin-top: var(--space-3);
+      }
+
+      .stat-card {
+        background: var(--white);
+        padding: var(--space-3);
+        border-radius: var(--radius-sm);
+        text-align: center;
+        border: 1px solid #e5e7eb;
+        box-shadow: var(--shadow-xs);
+      }
+
+      .stat-number {
+        font-size: var(--font-xl);
+        font-weight: var(--font-semibold);
+        color: var(--dark);
+      }
+
+      .stat-label {
+        font-size: var(--font-xs);
+        color: #6b7280;
+        margin-top: var(--space-1);
+        font-weight: var(--font-medium);
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--dark);
+        color: var(--white);
+        padding: var(--space-8) var(--space-4) var(--space-6);
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .footer p {
+        opacity: 0.8;
+        font-size: var(--font-sm);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 640px) {
+        .nav-desktop {
+          display: none;
+        }
+
+        .nav-mobile {
+          display: block;
+        }
+
+        .main {
+          padding: var(--space-4) var(--space-3);
+          padding-top: calc(var(--space-4) + 60px);
+        }
+
+        .tracker-container {
+          margin: 0;
+        }
+
+        .tracker-header h1 {
+          font-size: var(--font-3xl);
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: stretch;
+          gap: var(--space-3);
+        }
+
+        .mode-toggle {
+          align-self: center;
+        }
+
+        .table-container {
+          padding: var(--space-3);
+        }
+
+        .behavior-table th,
+        .behavior-table td {
+          padding: var(--space-2) var(--space-1);
+          font-size: var(--font-xs);
+        }
+
+        .summary-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 641px) {
+        .nav-desktop {
+          display: block;
+        }
+
+        .nav-mobile {
+          display: none;
+        }
+      }
+
+      /* Animation styles */
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideOut {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav">
+        <div class="nav-left">
+          <button class="menu-button" id="menuButton">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+          </button>
+        </div>
+        <div class="nav-center">
+          <a href="/" class="logo">
+            <svg
+              class="logo-icon"
+              viewBox="0 0 111.19 111.19"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <style>
+                  .cls-1 {
+                    fill: #6fc4ee;
+                  }
+                  .cls-2 {
+                    fill: #ffcd2f;
+                  }
+                  .cls-3 {
+                    fill: #9579b3;
+                  }
+                  .cls-4 {
+                    fill: #ef4a88;
+                  }
+                </style>
+              </defs>
+              <g id="Layer_1-2" data-name="Layer 1">
+                <g>
+                  <rect
+                    class="cls-1"
+                    width="53.6"
+                    height="53.6"
+                    rx="12"
+                    ry="12"
+                  />
+                  <rect
+                    class="cls-2"
+                    x="57.6"
+                    y="57.6"
+                    width="53.6"
+                    height="53.6"
+                    rx="26.8"
+                    ry="26.8"
+                  />
+                  <path
+                    class="cls-3"
+                    d="M29.39,111.19c-1.62,0-3.22-.6-4.46-1.77-2.09-1.96-2.64-5.07-1.36-7.63l5.72-11.48-19.54,11.28c-2.47,1.43-5.59,1.07-7.68-.87-2.09-1.95-2.67-5.03-1.42-7.6l6.14-12.64c-2.31.09-4.62-1.09-5.86-3.25-1.79-3.11-.73-7.08,2.38-8.88l14.76-8.52c2.47-1.43,5.59-1.07,7.68.87,2.09,1.95,2.67,5.03,1.42,7.6l-5.55,11.42,19.87-11.47c2.48-1.44,5.62-1.07,7.7.89,2.09,1.96,2.64,5.07,1.36,7.63l-6.22,12.47c2.42-.21,4.88.97,6.18,3.23,1.79,3.11.73,7.08-2.38,8.88l-15.5,8.95c-1.01.58-2.13.87-3.25.87Z"
+                  />
+                  <path
+                    class="cls-4"
+                    d="M96.54,26.8l12.14-12.14c3.35-3.35,3.35-8.79,0-12.14-3.35-3.35-8.79-3.35-12.14,0l-12.14,12.14-12.14-12.14c-3.35-3.35-8.79-3.35-12.14,0h0c-3.35,3.35-3.35,8.79,0,12.14l12.14,12.14-12.14,12.14c-3.35,3.35-3.35,8.79,0,12.14h0c3.35,3.35,8.79,3.35,12.14,0l12.14-12.14,12.14,12.14c3.35,3.35,8.79,3.35,12.14,0,3.35-3.35,3.35-8.79,0-12.14l-12.14-12.14Z"
+                  />
+                </g>
+              </g>
+            </svg>
+            <span class="logo-text">playful</span>
+          </a>
+        </div>
+        <div class="nav-right">
+          <!-- Reserved for future features like search -->
+        </div>
+      </nav>
+    </header>
+
+    <!-- Desktop Navigation -->
+    <div class="nav-desktop">
+      <nav class="sidebar-desktop" id="sidebarDesktop">
+        <button class="sidebar-close" id="sidebarCloseDesktop"></button>
+        <div class="sidebar-content">
+          <div class="sidebar-section">
+            <h3>Tools</h3>
+            <ul class="sidebar-nav">
+              <li><a href="behavior-meter.html">Behavior Meter</a></li>
+              <li><a href="weekly-tracker.html">Weekly Tracker</a></li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Quick Assessment
+                  <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Study Planner <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Class Timer <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Goal Tracker <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Games</h3>
+            <ul class="sidebar-nav">
+              <li><a href="trivia-bingo/">Trivia Bingo</a></li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Resources</h3>
+            <ul class="sidebar-nav">
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Teaching Guides
+                  <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Blog <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Templates <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>About</h3>
+            <ul class="sidebar-nav">
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#help">Help & Support</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="nav-mobile">
+      <nav class="sidebar-mobile" id="sidebarMobile">
+        <button class="sidebar-close" id="sidebarCloseMobile"></button>
+        <div class="sidebar-content">
+          <div class="sidebar-section">
+            <h3>Tools</h3>
+            <ul class="sidebar-nav">
+              <li><a href="behavior-meter.html">Behavior Meter</a></li>
+              <li><a href="weekly-tracker.html">Weekly Tracker</a></li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Quick Assessment
+                  <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Study Planner <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Class Timer <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Goal Tracker <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Games</h3>
+            <ul class="sidebar-nav">
+              <li><a href="trivia-bingo/">Trivia Bingo</a></li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Resources</h3>
+            <ul class="sidebar-nav">
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Teaching Guides
+                  <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Blog <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+              <li>
+                <a href="#" style="opacity: 0.5"
+                  >Templates <span style="font-size: 0.7em">(Soon)</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>About</h3>
+            <ul class="sidebar-nav">
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#help">Help & Support</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="tracker-content">
+        <div class="tracker-container animate gentleSettle delay-1">
+          <div class="tracker-header">
+            <h1>Weekly Tracker</h1>
+            <p class="subtitle">
+              Track positive classroom behaviors throughout the week
+            </p>
+          </div>
+
+          <div class="controls">
+            <div class="mode-toggle">
+              <button class="mode-btn active" onclick="setMode('class')">
+                Whole Class
+              </button>
+              <button class="mode-btn" onclick="setMode('individual')">
+                Individual Students
+              </button>
+            </div>
+
+            <div class="add-student" id="studentControls" style="display: none">
+              <input
+                type="text"
+                id="studentName"
+                placeholder="Enter student name"
+                maxlength="30"
+              />
+              <button onclick="addStudent()">Add Student</button>
+            </div>
+
+            <div class="save-load-controls">
+              <button class="save-btn" onclick="saveData()">
+                💾 Save Week
+              </button>
+              <button
+                class="load-btn"
+                onclick="document.getElementById('fileInput').click()"
+              >
+                📁 Load Week
+              </button>
+              <input
+                type="file"
+                id="fileInput"
+                class="file-input"
+                accept=".json"
+                onchange="loadData(event)"
+              />
+              <button class="reset-btn" onclick="resetWeek()">
+                🔄 Reset Week
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <div class="metrics">
+              <h3>Behavior Goals This Week:</h3>
+              <div class="metric-tags">
+                <span class="metric-tag">Walking quietly in hallways</span>
+                <span class="metric-tag">Cleaning up classroom</span>
+                <span class="metric-tag">Using inside voices</span>
+                <span class="metric-tag">Following directions</span>
+                <span class="metric-tag">Being respectful to others</span>
+                <span class="metric-tag">Staying on task</span>
+                <span class="metric-tag">Helping classmates</span>
+              </div>
+            </div>
+
+            <table class="behavior-table" id="behaviorTable">
+              <thead>
+                <tr>
+                  <th>Student/Class</th>
+                  <th class="day-header">Mon</th>
+                  <th class="day-header">Tue</th>
+                  <th class="day-header">Wed</th>
+                  <th class="day-header">Thu</th>
+                  <th class="day-header">Fri</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <tr data-student="class">
+                  <td>
+                    <span class="student-name">Whole Class</span>
+                    <div class="behavior-metric">
+                      Meeting daily behavior goals
+                    </div>
+                  </td>
+                  <td class="day-cell" onclick="toggleStatus('class', 0)">
+                    <div class="status-indicator" data-status="empty"></div>
+                  </td>
+                  <td class="day-cell" onclick="toggleStatus('class', 1)">
+                    <div class="status-indicator" data-status="empty"></div>
+                  </td>
+                  <td class="day-cell" onclick="toggleStatus('class', 2)">
+                    <div class="status-indicator" data-status="empty"></div>
+                  </td>
+                  <td class="day-cell" onclick="toggleStatus('class', 3)">
+                    <div class="status-indicator" data-status="empty"></div>
+                  </td>
+                  <td class="day-cell" onclick="toggleStatus('class', 4)">
+                    <div class="status-indicator" data-status="empty"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="week-summary">
+              <h3>Week Summary</h3>
+              <div class="summary-stats" id="summaryStats">
+                <div class="stat-card">
+                  <div class="stat-number" id="checksCount">0</div>
+                  <div class="stat-label">Total Checks ✓</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" id="xCount">0</div>
+                  <div class="stat-label">Total X's ✗</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" id="successRate">0%</div>
+                  <div class="stat-label">Success Rate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        &copy; 2025 Playful Creative Works. Designed for educators, by
+        educators.
+      </p>
+    </footer>
+
+    <script>
+      // Sidebar functionality
+      const menuButton = document.getElementById("menuButton");
+      const sidebarDesktop = document.getElementById("sidebarDesktop");
+      const sidebarMobile = document.getElementById("sidebarMobile");
+      const sidebarCloseDesktop = document.getElementById(
+        "sidebarCloseDesktop"
+      );
+      const sidebarCloseMobile = document.getElementById("sidebarCloseMobile");
+      const overlay = document.getElementById("overlay");
+
+      function isMobile() {
+        return window.innerWidth <= 640;
+      }
+
+      function toggleSidebar() {
+        if (isMobile()) {
+          const isOpen = sidebarMobile.classList.contains("open");
+          if (isOpen) {
+            sidebarMobile.classList.remove("open");
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+          } else {
+            sidebarMobile.classList.add("open");
+            overlay.classList.add("active");
+            document.body.style.overflow = "hidden";
+          }
+        } else {
+          const isOpen = sidebarDesktop.classList.contains("open");
+          if (isOpen) {
+            sidebarDesktop.classList.remove("open");
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+          } else {
+            sidebarDesktop.classList.add("open");
+            overlay.classList.add("active");
+            document.body.style.overflow = "hidden";
+          }
+        }
+      }
+
+      function closeSidebar() {
+        sidebarDesktop.classList.remove("open");
+        sidebarMobile.classList.remove("open");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      menuButton.addEventListener("click", toggleSidebar);
+      sidebarCloseDesktop.addEventListener("click", closeSidebar);
+      sidebarCloseMobile.addEventListener("click", closeSidebar);
+      overlay.addEventListener("click", closeSidebar);
+
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "Escape" &&
+          (sidebarDesktop.classList.contains("open") ||
+            sidebarMobile.classList.contains("open"))
+        ) {
+          closeSidebar();
+        }
+      });
+
+      // Weekly Tracker functionality
+      let currentMode = "class";
+      let students = ["class"];
+      let behaviorData = {};
+
+      function setMode(mode) {
+        currentMode = mode;
+        setModeUI(mode);
+
+        if (mode === "class") {
+          students = ["class"];
+          renderTable();
+        }
+      }
+
+      function resetWeek() {
+        if (confirm("Are you sure you want to reset all data for this week?")) {
+          behaviorData = {};
+          document
+            .querySelectorAll(".status-indicator")
+            .forEach((indicator) => {
+              indicator.setAttribute("data-status", "empty");
+              indicator.className = "status-indicator";
+            });
+          updateSummary();
+        }
+      }
+
+      function addStudent() {
+        const nameInput = document.getElementById("studentName");
+        const name = nameInput.value.trim();
+
+        if (name && !students.includes(name)) {
+          students.push(name);
+          renderTable();
+          nameInput.value = "";
+          updateSummary();
+        }
+      }
+
+      function renderTable() {
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+
+        students.forEach((student) => {
+          const row = document.createElement("tr");
+          row.setAttribute("data-student", student);
+
+          const isClass = student === "class";
+          const displayName = isClass ? "Whole Class" : student;
+          const description = isClass
+            ? "Meeting daily behavior goals"
+            : "Individual behavior tracking";
+
+          row.innerHTML = `
+            <td>
+              <span class="student-name">${displayName}</span>
+              <div class="behavior-metric">${description}</div>
+            </td>
+            ${[0, 1, 2, 3, 4]
+              .map(
+                (day) => `
+              <td class="day-cell" onclick="toggleStatus('${student}', ${day})">
+                <div class="status-indicator" data-status="empty"></div>
+              </td>
+            `
+              )
+              .join("")}
+          `;
+
+          tableBody.appendChild(row);
+        });
+
+        restoreData();
+      }
+
+      function toggleStatus(student, day) {
+        const row = document.querySelector(`[data-student="${student}"]`);
+        const indicator = row.querySelectorAll(".status-indicator")[day];
+        const currentStatus = indicator.getAttribute("data-status");
+
+        let newStatus;
+        if (currentStatus === "empty") {
+          newStatus = "check";
+        } else if (currentStatus === "check") {
+          newStatus = "x";
+        } else {
+          newStatus = "empty";
+        }
+
+        indicator.setAttribute("data-status", newStatus);
+        indicator.className = `status-indicator ${
+          newStatus === "empty" ? "" : newStatus
+        }`;
+
+        if (!behaviorData[student]) {
+          behaviorData[student] = {};
+        }
+        behaviorData[student][day] = newStatus;
+
+        updateSummary();
+      }
+
+      function restoreData() {
+        Object.keys(behaviorData).forEach((student) => {
+          const row = document.querySelector(`[data-student="${student}"]`);
+          if (row) {
+            Object.keys(behaviorData[student]).forEach((day) => {
+              const indicator = row.querySelectorAll(".status-indicator")[day];
+              const status = behaviorData[student][day];
+              indicator.setAttribute("data-status", status);
+              indicator.className = `status-indicator ${
+                status === "empty" ? "" : status
+              }`;
+            });
+          }
+        });
+        updateSummary();
+      }
+
+      function updateSummary() {
+        let totalChecks = 0;
+        let totalX = 0;
+
+        Object.values(behaviorData).forEach((studentData) => {
+          Object.values(studentData).forEach((status) => {
+            if (status === "check") totalChecks++;
+            if (status === "x") totalX++;
+          });
+        });
+
+        const total = totalChecks + totalX;
+        const successRate =
+          total > 0 ? Math.round((totalChecks / total) * 100) : 0;
+
+        document.getElementById("checksCount").textContent = totalChecks;
+        document.getElementById("xCount").textContent = totalX;
+        document.getElementById("successRate").textContent = successRate + "%";
+      }
+
+      function saveData() {
+        const saveData = {
+          students: students,
+          behaviorData: behaviorData,
+          currentMode: currentMode,
+          timestamp: new Date().toISOString(),
+          weekOf: getWeekOfDate(),
+        };
+
+        const dataStr = JSON.stringify(saveData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: "application/json" });
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(dataBlob);
+        link.download = `behavior-tracker-${getWeekOfDate()}.json`;
+        link.click();
+
+        showMessage(
+          "Week data saved! File downloaded to your computer.",
+          "success"
+        );
+      }
+
+      function loadData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            const loadedData = JSON.parse(e.target.result);
+
+            if (loadedData.students && loadedData.behaviorData) {
+              students = loadedData.students;
+              behaviorData = loadedData.behaviorData;
+              currentMode = loadedData.currentMode || "class";
+
+              setModeUI(currentMode);
+              renderTable();
+              updateSummary();
+
+              showMessage(
+                `Week data loaded successfully! (Week of ${
+                  loadedData.weekOf || "Unknown"
+                })`,
+                "success"
+              );
+            } else {
+              throw new Error("Invalid file format");
+            }
+          } catch (error) {
+            showMessage(
+              "Error loading file. Please make sure it's a valid behavior tracker file.",
+              "error"
+            );
+          }
+        };
+        reader.readAsText(file);
+
+        event.target.value = "";
+      }
+
+      function getWeekOfDate() {
+        const now = new Date();
+        const monday = new Date(now);
+        monday.setDate(now.getDate() - now.getDay() + 1);
+        return monday.toISOString().split("T")[0];
+      }
+
+      function showMessage(text, type) {
+        const message = document.createElement("div");
+        message.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          padding: 12px 20px;
+          border-radius: 12px;
+          color: white;
+          font-weight: 500;
+          z-index: 1000;
+          animation: slideIn 0.3s ease;
+          max-width: 300px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        `;
+
+        if (type === "success") {
+          message.style.background = "#8dc757";
+        } else {
+          message.style.background = "#ef4a88";
+        }
+
+        message.textContent = text;
+        document.body.appendChild(message);
+
+        setTimeout(() => {
+          message.style.animation = "slideOut 0.3s ease";
+          setTimeout(() => {
+            if (message.parentNode) {
+              message.parentNode.removeChild(message);
+            }
+          }, 300);
+        }, 3000);
+      }
+
+      function setModeUI(mode) {
+        document.querySelectorAll(".mode-btn").forEach((btn) => {
+          btn.classList.remove("active");
+          if (btn.textContent.toLowerCase().includes(mode)) {
+            btn.classList.add("active");
+          }
+        });
+
+        const studentControls = document.getElementById("studentControls");
+        if (mode === "individual") {
+          studentControls.style.display = "flex";
+        } else {
+          studentControls.style.display = "none";
+        }
+      }
+
+      // Add Enter key support for adding students
+      document
+        .getElementById("studentName")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            addStudent();
+          }
+        });
+
+      // Initialize
+      renderTable();
+      updateSummary();
+    </script>
+  </body>
+</html>
